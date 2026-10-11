@@ -1,0 +1,37 @@
+[
+  {
+    "skills": ["capturing-journeys"],
+    "query": "系統都做完了，幫我把整個系統從登入到排出班表完整走一遍，每一步都拍下來",
+    "files": [],
+    "gap_without_skill": "沒有 skill 時 Claude 會直接寫一支一次性的截圖腳本，順序憑感覺、資料寫死在各處，之後改版無法局部重拍，也沒有記錄哪些畫面依賴什麼。",
+    "expected_behavior": [
+      "先讀或和使用者一起寫 USER_STORY.md，再由故事導出圖清單；清單含 id、中文圖說、類型、穩定性，並等使用者確認才開始拍",
+      "建立 todo list 逐項追蹤（故事、清單、環境、拍攝、驗收、登錄）",
+      "畫面上的人名、日期、數字來自 facts.json，不寫死在 spec；每張圖用 shoot() 拍整個視窗",
+      "拍完逐張打開 PNG 檢查，連跑 3 次不靠重試，並執行 stale.py record 寫入 manifest"
+    ]
+  },
+  {
+    "skills": ["capturing-journeys"],
+    "query": "我改了共用的側邊欄元件，還有把系統名稱改掉了，哪些截圖要重拍？",
+    "files": [],
+    "gap_without_skill": "沒有 skill 時 Claude 會整套重拍並覆蓋舊圖，或只靠像素比對（容許值太寬而漏掉改名），看不出哪些圖受影響、原因是什麼。",
+    "expected_behavior": [
+      "執行 stale.py check，依章節列出疑似過時的圖並說明原因（哪個檔案或哪個事實變了）",
+      "只重拍受影響的章節，重拍前先刪舊 PNG，並用 --retries=0",
+      "用 stale.py compare 依差異比例排序，差異小的接受、差異大的請使用者過目",
+      "標為 volatile 的圖重拍後主動提醒使用者人工確認，並提醒旁白與數字要依當次結果核對"
+    ]
+  },
+  {
+    "skills": ["capturing-journeys"],
+    "query": "排班演算法跑出來的結果每次都不一樣，這幾張圖之後重拍會變嗎？要怎麼處理？",
+    "files": [],
+    "gap_without_skill": "沒有 skill 時 Claude 會建議固定亂數種子或直接 mock 掉結果，沒有把不穩定標記在 manifest 讓後續使用者知道這張圖重拍會變。",
+    "expected_behavior": [
+      "在 manifest 為這些圖標 stability: volatile 與原因 solver",
+      "說明策略：框用元素名稱對位而非座標；圖旁的數字與說明要從當次結果核對；重拍後必須人工過目",
+      "不把 volatile 的圖納入文字雜湊比對"
+    ]
+  }
+]

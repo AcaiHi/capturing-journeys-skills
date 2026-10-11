@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "title": "{name}",
+  "checkpoints": {
+    "C0": { "provides": ["登入"] }
+  },
+  "screens": []
+}
