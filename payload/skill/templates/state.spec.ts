@@ -27,7 +27,7 @@ test.describe('第 2 章：排班', () => {
     await page.goto('/schedule');
     await page.getByRole('button', { name: '開始求解' }).click();
     await expect(page.getByText('求解完成')).toBeVisible();
-    // 內容每次可能不同：volatile，不做文字雜湊比對；manifest 也要標 volatile。
+    // 內容每次不固定：volatile，不做文字雜湊比對；manifest 也要標 volatile。
     await shoot(page, '030-solver-result', { volatile: true });
   });
 

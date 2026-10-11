@@ -47,7 +47,7 @@ export async function shoot(page: Page, id: string, opts: ShootOptions = {}) {
     expect(textHash, `${id}：畫面文字與上次拍攝不同（即使像素差異在容許值內），這張圖可能已過時`).toBe(prev.textHash);
   }
 
-  // volatile 的圖內容每次可能不同：不帶 --update-snapshots 時只跑守門斷言、不比對像素，
+  // volatile 的圖內容每次不固定：不帶 --update-snapshots 時只跑守門斷言、不比對像素，
   // 這樣連跑 3 次與整套檢查才不會必然失敗；是否正確靠人工看圖。
   // 圖還不存在時一定要拍，不然 volatile 的圖永遠不會有第一張。
   if (updating || !opts.volatile || !fs.existsSync(path.join(screens, `${id}.png`))) {

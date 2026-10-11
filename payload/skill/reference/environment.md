@@ -57,7 +57,7 @@ mock 與真實系統的差異是最常見的錯誤來源，所以：
   test.beforeAll(() => { execSync('npm run seed -- --checkpoint C2', { cwd: '../..', stdio: 'inherit' }); });
   ```
 
-  還原後記得重新登入（session 可能已失效）。沒有種子腳本或快照可用，就在 manifest 把這些圖設成同一個 `chain`（例如 `"chain": "flow-main"`），`check` 會在其中任一張過時時把整條列出，只能整條重拍；並告訴使用者這個代價。
+  還原後重新登入。沒有種子腳本或快照可用，就在 manifest 把這些圖設成同一個 `chain`（例如 `"chain": "flow-main"`），`check` 會在其中任一張過時時把整條列出，只能整條重拍；並告訴使用者這個代價。
 - 演算法或 LLM 的結果想讓它固定：可以固定亂數種子、或把求解器的回應 mock 成固定資料，圖就能由 `volatile` 改標 `stable`。固定種子需要改 app，先問使用者；mock 回應則用有狀態 mock 即可。
 
 ## _backend.ts：共用 mock

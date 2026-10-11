@@ -4,7 +4,7 @@
 可重複執行；既有檔案一律不覆蓋，只有 CLAUDE.md / AGENTS.md 裡標記區塊內的規則會依模板刷新。
 
 常數：
-    FRAMEWORK_PORTS  依 package.json 相依套件猜測開發伺服器 port（找不到 vite.config 的 port 時使用）
+    FRAMEWORK_PORTS  依 package.json 相依套件決定預設開發伺服器 port（找不到 vite.config 的 port 時使用）
 """
 import argparse
 import datetime

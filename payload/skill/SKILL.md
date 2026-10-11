@@ -62,7 +62,7 @@ docs/ui-inventory/
 **4. 拍攝** — `states/_shoot.ts`、`_story.ts`、`_backend.ts` 已由 sync 建立，直接 import；spec 的寫法範本在 `.claude/skills/capturing-journeys/templates/state.spec.ts`。規則：
 - 每個畫面一個 `test('<id>：<圖說>')`，`<id>` 為 kebab-case，全專案唯一，同時是檔名。
 - 一律用 `shoot(page, '<id>')`，拍整個視窗，不拍 `fullPage` 或單一元素，所有圖才會是同樣尺寸。內容在畫面下方就先捲過去。
-- 拍之前先斷言這個畫面獨有的東西（步驟標題、頁面標題），不要只檢查網址；頁面可能轉址，拍錯頁一樣會「通過」。
+- 拍之前先斷言這個畫面獨有的東西（步驟標題、頁面標題），不要只檢查網址；頁面若有轉址，拍錯頁一樣會「通過」。
   斷言的名稱若同時是其他元素文字的一部分（側邊欄、頁首也含這幾個字），要加 `exact: true`，否則 strict mode 會報多重匹配。
 - 定位順序：`getByRole` / `getByText` / `getByLabel`，其次 `getByTestId`，不用 CSS class。
   側邊欄的導覽即使沒有 `href` 也常帶 `role="link"`，用 `getByRole('link', { name: '…' })`；找不到再看 DOM 是否缺可及名稱。圖示按鈕沒有可及名稱時，可加 `aria-label`（見下方「發現 app 問題」）。

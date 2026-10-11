@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 // 用 fs 讀 JSON：JSON import 在 CJS 與 ESM 專案的寫法不同（ESM 需要 import attribute），容易直接壞掉。
-// 執行時工作目錄通常是專案根目錄（npx playwright test -c docs/ui-inventory），在 docs/ui-inventory 內執行也找得到。
+// 執行時工作目錄是專案根目錄（npx playwright test -c docs/ui-inventory），在 docs/ui-inventory 內執行也找得到。
 function loadFacts(): Record<string, string | number> {
   const candidates = ['docs/ui-inventory/facts.json', 'facts.json'].map((p) => path.resolve(process.cwd(), p));
   const file = candidates.find((p) => fs.existsSync(p));

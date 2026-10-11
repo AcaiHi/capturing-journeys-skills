@@ -470,7 +470,7 @@ def cmd_inventory(c: Ctx, a):
             if s.get("warn"):
                 out.append(f"警告：{s['warn']}")
             if s.get("stability") == "volatile":
-                out.append(f"註：此圖重拍可能不同（{', '.join(s.get('volatileBy', [])) or 'volatile'}）。")
+                out.append(f"註：此圖重拍時內容不固定（{', '.join(s.get('volatileBy', [])) or 'volatile'}）。")
             out.append("")
     if extra:
         out += [f"另有 {extra} 張「只拍不放」的圖，見 manifest.json。", ""]
@@ -491,7 +491,7 @@ def cmd_dups(c: Ctx, a):
         return
     for g in dup:
         print("完全相同: " + ", ".join(g))
-    print("確認這些是否拍到了同一個畫面（可能是重複，或其中一張拍錯頁）。")
+    print("確認這些是否拍到了同一個畫面（原因有兩種：重複拍同一個畫面，或其中一張拍錯頁）。")
 
 
 # --------------------------------------------------------- backup/compare
